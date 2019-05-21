@@ -16,21 +16,21 @@ public class Playfield
         _Columns = columns;
 
         // Making a 2D array of blocks
-        for (int i = 0; i < rows; i++)
+        for (int row = 0; row < rows; row++)
         {
-            for (int j = 0; j < columns; j++)
+            for (int col = 0; col < columns; col++)
             {
                 // Defining wall blocks
-                if ((i == rows - 1) || (j == 0) || (j == columns - 1))
+                if ((row == rows - 1) || (col == 0) || (col == columns - 1))
                 {
                     // Default colour should never show
-                    grid[i, j] = new Block(Color.Black, j, i);
-                    grid[i, j].Type = BlockType.Wall;
+                    grid[row, col] = new Block(Color.Black, col, row);
+                    grid[row, col].Type = BlockType.Wall;
                 }
                 else
                 {
-                    grid[i, j] = new Block(Color.Gray, j, i);
-                    grid[i, j].Type = BlockType.Empty;
+                    grid[row, col] = new Block(Color.Gray, col, row);
+                    grid[row, col].Type = BlockType.Empty;
                 }
             }
         }
@@ -48,91 +48,47 @@ public class Playfield
         }
     }
 
-    public bool isRowFilled(int rowNum)
+    private void deleteRow(int rowToDelete)
     {
-
-        int numFilled = 0;
-        for (int col = 1; col < _Columns - 1; col++)
+        for (var row = rowToDelete; row > 0; row--)
         {
-            if (_Grid[rowNum, col].Type == BlockType.Filled)
-            {
-                numFilled++;
-            }
+            copyRow(row - 1, row);
         }
 
-        //is numfilled same as number of columns
-        return numFilled == _Columns - 2;
+        for (var col = 1; col < _Columns - 1; col++)
+        {
+            _Grid[0, col].Type = BlockType.Empty;
+        }
     }
 
-    public bool isRowEmpty(int rowNum)
+    private void copyRow(int fromRow, int toRow)
     {
-
-        int numEmpty = 0;
-        for (int col = 1; col < _Columns - 1; col++)
+        // Starting at 1 and finshing n - 1 to ignore walls
+        for (var col = 1; col < _Columns - 1; col++)
         {
-            if (_Grid[rowNum, col].Type == BlockType.Empty)
-            {
-                numEmpty++;
-            }
-        }
-
-        //is numempty same as number of columns
-        return numEmpty == _Columns - 2;
+            _Grid[toRow, col] = _Grid[fromRow, col].Clone();
+            _Grid[toRow, col].Y++;        }
     }
 
-    private void emptyRow(int row)
-    {
-        for (int col = 0; col < _Columns - 1; col++)
-        {
-            if (!((col == 0) || (col == _Columns - 1)))
-            {
-                _Grid[row, col] = _Grid[0, col].Clone();
-            }
-        }
-    }
-
-    private void deleteRow(int row)
-    {
-        for (int k = 0; k < _Columns - 1; k++)
-        {
-            if (!((k == 0) || (k == _Columns - 1)))
-            {
-                _Grid[row, k].Type = BlockType.Empty;
-                // swapRows(row, row - 1);
-            }
-        }
-    }
-
-    public void copyDown(int fromRow, int toRow) {
-
-        if (isRowFilled(toRow)) {
-            //do the actual copy.
-        }
-
-        if (fromRow - 1 > _Rows - 1)
-            copyDown(fromRow - 1, toRow - 1);
-    }
-
-    // Checks through the current playfield, bottom to top, for matching lines, then clears the blocks
     public void ClearLines()
     {
-        for (int i = _Rows - 1; i > 0; i--)
+        for (int row = _Rows - 1; row > 0; row--)
         {
-            if (isRowFilled(i))
-            {
-                deleteRow(i);
-            }
+            while (isRowFilled(row)) deleteRow(row);
         }
         DrawBlocks();
     }
 
-    public void UpdateGrid()
+    private bool isRowFilled(int rowNum)
     {
-        for (int row = _Rows - 1; row < 0; row--)
+        for (int col = 1; col < _Columns - 1; col++)
         {
-            copyDown(0, row);
+            if (_Grid[rowNum, col].Type != BlockType.Filled)
+            {
+                return false;
+            }
         }
 
-        DrawBlocks();
+        return true;
     }
 }

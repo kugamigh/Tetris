@@ -210,13 +210,12 @@ public class Game
 
     public void UpdateGame()
     {
-        // if (gameTimer.Ticks > 0 && gameTimer.Ticks % 16 < 1)
-        // {
-        //     Console.WriteLine(gameTimer.Ticks);
-        //     MoveDown();
-        // }
+        if (gameTimer.Ticks > 0 && gameTimer.Ticks % 17 < 1)
+        {
+            Console.WriteLine(gameTimer.Ticks);
+            MoveDown();
+        }
         // Console.WriteLine(gameTimer.Ticks);
-        TetrisGrid.UpdateGrid();
     }
 
     public void DrawGame()

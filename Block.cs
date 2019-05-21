@@ -14,7 +14,7 @@ public class Block
     public Color _Colour = Color.Black;
     public int _Size = 32;
     public int X = 0;
-    public int Y = 0;
+    public int Y { get; set; }
     public BlockType Type { get; set; }
 
     public Block(Color colour, int x, int y)
