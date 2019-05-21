@@ -116,28 +116,8 @@ public class Playfield
     // Checks through the current playfield, bottom to top, for matching lines, then clears the blocks
     public void ClearLines()
     {
-        // int numFilled = 0;
-
         for (int i = _Rows - 1; i > 0; i--)
         {
-            // numFilled = 0;
-            // for (int j = 0; j < _Columns - 1; j++)
-            // {
-            //     // Ignore walls
-            //     if (!((i == _Rows - 1) || (j == 0) || (j == _Columns - 1)))
-            //     {
-            //         if (_Grid[i, j].Type == BlockType.Filled)
-            //         {
-            //             numFilled++;
-            //             // When number of filled blocks is the width of the playfield minus walls, we clear the line
-            //             if (numFilled == _Columns - 2)
-            //             {
-            //                 deleteRow(i);
-            //             }
-            //         }
-            //     }
-            // }
-
             if (isRowFilled(i))
             {
                 deleteRow(i);
@@ -148,29 +128,6 @@ public class Playfield
 
     public void UpdateGrid()
     {
-        // int numEmpty = 0;
-
-        // for (int i = _Rows - 1; i > 1; i--)
-        // {
-        // numEmpty = 0;
-        // for (int j = 0; j < _Columns - 1; j++)
-        // {
-        //     // Ignore walls
-        //     if (!((i == _Rows - 1) || (j == 0) || (j == _Columns - 1)))
-        //     {
-        //         if (_Grid[i, j].Type == BlockType.Empty)
-        //         {
-        //             numEmpty++;
-        //             // When number of filled blocks is the width of the playfield minus walls, we clear the line
-        //             if (numEmpty == _Columns - 2)
-        //             {
-        //                 swapRows(i, i - 1);
-        //             }
-        //         }
-        //     }
-        // }
-        // }
-
         for (int row = _Rows - 1; row < 0; row--)
         {
             copyDown(0, row);
