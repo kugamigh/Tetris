@@ -12,7 +12,7 @@ public class Program
         {        
             gameWindow.Clear(Color.White);
             
-            // Tetris.UpdateGame();
+            Tetris.UpdateGame();
             Tetris.DrawGame();
             Tetris.HandleInput();
 

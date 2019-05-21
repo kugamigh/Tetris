@@ -48,15 +48,45 @@ public class Playfield
         }
     }
 
-    private void swapRows(int row1, int row2)
+    public bool isRowFilled(int rowNum)
     {
-        for (int k = 0; k < _Columns - 1; k++)
+
+        int numFilled = 0;
+        for (int col = 1; col < _Columns - 1; col++)
         {
-            if (!((k == 0) || (k == _Columns - 1)))
+            if (_Grid[rowNum, col].Type == BlockType.Filled)
             {
-                Block temp = _Grid[row1, k];
-                _Grid[row1, k] = _Grid[row2, k];
-                _Grid[row2, k] = temp;
+                numFilled++;
+            }
+        }
+
+        //is numfilled same as number of columns
+        return numFilled == _Columns - 2;
+    }
+
+    public bool isRowEmpty(int rowNum)
+    {
+
+        int numEmpty = 0;
+        for (int col = 1; col < _Columns - 1; col++)
+        {
+            if (_Grid[rowNum, col].Type == BlockType.Empty)
+            {
+                numEmpty++;
+            }
+        }
+
+        //is numempty same as number of columns
+        return numEmpty == _Columns - 2;
+    }
+
+    private void emptyRow(int row)
+    {
+        for (int col = 0; col < _Columns - 1; col++)
+        {
+            if (!((col == 0) || (col == _Columns - 1)))
+            {
+                _Grid[row, col] = _Grid[0, col].Clone();
             }
         }
     }
@@ -68,34 +98,49 @@ public class Playfield
             if (!((k == 0) || (k == _Columns - 1)))
             {
                 _Grid[row, k].Type = BlockType.Empty;
-                swapRows(row, row - 1);
+                // swapRows(row, row - 1);
             }
         }
+    }
+
+    public void copyDown(int fromRow, int toRow) {
+
+        if (isRowFilled(toRow)) {
+            //do the actual copy.
+        }
+
+        if (fromRow - 1 > _Rows - 1)
+            copyDown(fromRow - 1, toRow - 1);
     }
 
     // Checks through the current playfield, bottom to top, for matching lines, then clears the blocks
     public void ClearLines()
     {
-        int numFilled = 0;
+        // int numFilled = 0;
 
         for (int i = _Rows - 1; i > 0; i--)
         {
-            numFilled = 0;
-            for (int j = 0; j < _Columns - 1; j++)
+            // numFilled = 0;
+            // for (int j = 0; j < _Columns - 1; j++)
+            // {
+            //     // Ignore walls
+            //     if (!((i == _Rows - 1) || (j == 0) || (j == _Columns - 1)))
+            //     {
+            //         if (_Grid[i, j].Type == BlockType.Filled)
+            //         {
+            //             numFilled++;
+            //             // When number of filled blocks is the width of the playfield minus walls, we clear the line
+            //             if (numFilled == _Columns - 2)
+            //             {
+            //                 deleteRow(i);
+            //             }
+            //         }
+            //     }
+            // }
+
+            if (isRowFilled(i))
             {
-                // Ignore walls
-                if (!((i == _Rows - 1) || (j == 0) || (j == _Columns - 1)))
-                {
-                    if (_Grid[i, j].Type == BlockType.Filled)
-                    {
-                        numFilled++;
-                        // When number of filled blocks is the width of the playfield minus walls, we clear the line
-                        if (numFilled == _Columns - 2)
-                        {
-                            deleteRow(i);
-                        }
-                    }
-                }
+                deleteRow(i);
             }
         }
         DrawBlocks();
@@ -103,28 +148,34 @@ public class Playfield
 
     public void UpdateGrid()
     {
-        int numEmpty = 0;
+        // int numEmpty = 0;
 
-        for (int i = _Rows - 1; i > 0; i--)
+        // for (int i = _Rows - 1; i > 1; i--)
+        // {
+        // numEmpty = 0;
+        // for (int j = 0; j < _Columns - 1; j++)
+        // {
+        //     // Ignore walls
+        //     if (!((i == _Rows - 1) || (j == 0) || (j == _Columns - 1)))
+        //     {
+        //         if (_Grid[i, j].Type == BlockType.Empty)
+        //         {
+        //             numEmpty++;
+        //             // When number of filled blocks is the width of the playfield minus walls, we clear the line
+        //             if (numEmpty == _Columns - 2)
+        //             {
+        //                 swapRows(i, i - 1);
+        //             }
+        //         }
+        //     }
+        // }
+        // }
+
+        for (int row = _Rows - 1; row < 0; row--)
         {
-            numEmpty = 0;
-            for (int j = 0; j < _Columns - 1; j++)
-            {
-                // Ignore walls
-                if (!((i == _Rows - 1) || (j == 0) || (j == _Columns - 1)))
-                {
-                    if (_Grid[i, j].Type == BlockType.Empty)
-                    {
-                        numEmpty++;
-                        // When number of filled blocks is the width of the playfield minus walls, we clear the line
-                        if (numEmpty == _Columns - 2)
-                        {
-                            swapRows(i, i - 1);
-                        }
-                    }
-                }
-            }
+            copyDown(0, row);
         }
+
         DrawBlocks();
     }
 }
