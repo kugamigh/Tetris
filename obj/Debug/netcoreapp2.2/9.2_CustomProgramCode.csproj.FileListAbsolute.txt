@@ -1,0 +1,11 @@
+C:\Users\hoboj\OneDrive\Documents\2019\T1\SIT232 - Object Oriented Development\Code\9.2_CustomProgramCode\bin\Debug\netcoreapp2.2\9.2_CustomProgramCode.deps.json
+C:\Users\hoboj\OneDrive\Documents\2019\T1\SIT232 - Object Oriented Development\Code\9.2_CustomProgramCode\bin\Debug\netcoreapp2.2\9.2_CustomProgramCode.runtimeconfig.json
+C:\Users\hoboj\OneDrive\Documents\2019\T1\SIT232 - Object Oriented Development\Code\9.2_CustomProgramCode\bin\Debug\netcoreapp2.2\9.2_CustomProgramCode.runtimeconfig.dev.json
+c:\Users\hoboj\OneDrive\Documents\2019\T1\SIT232 - Object Oriented Development\Code\9.2_CustomProgramCode\bin\Debug\netcoreapp2.2\9.2_CustomProgramCode.dll
+c:\Users\hoboj\OneDrive\Documents\2019\T1\SIT232 - Object Oriented Development\Code\9.2_CustomProgramCode\bin\Debug\netcoreapp2.2\9.2_CustomProgramCode.pdb
+c:\Users\hoboj\OneDrive\Documents\2019\T1\SIT232 - Object Oriented Development\Code\9.2_CustomProgramCode\obj\Debug\netcoreapp2.2\9.2_CustomProgramCode.csprojAssemblyReference.cache
+c:\Users\hoboj\OneDrive\Documents\2019\T1\SIT232 - Object Oriented Development\Code\9.2_CustomProgramCode\obj\Debug\netcoreapp2.2\9.2_CustomProgramCode.csproj.CoreCompileInputs.cache
+c:\Users\hoboj\OneDrive\Documents\2019\T1\SIT232 - Object Oriented Development\Code\9.2_CustomProgramCode\obj\Debug\netcoreapp2.2\9.2_CustomProgramCode.AssemblyInfoInputs.cache
+c:\Users\hoboj\OneDrive\Documents\2019\T1\SIT232 - Object Oriented Development\Code\9.2_CustomProgramCode\obj\Debug\netcoreapp2.2\9.2_CustomProgramCode.AssemblyInfo.cs
+c:\Users\hoboj\OneDrive\Documents\2019\T1\SIT232 - Object Oriented Development\Code\9.2_CustomProgramCode\obj\Debug\netcoreapp2.2\9.2_CustomProgramCode.dll
+c:\Users\hoboj\OneDrive\Documents\2019\T1\SIT232 - Object Oriented Development\Code\9.2_CustomProgramCode\obj\Debug\netcoreapp2.2\9.2_CustomProgramCode.pdb
