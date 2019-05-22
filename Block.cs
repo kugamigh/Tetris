@@ -26,29 +26,29 @@ public class Block
 
     public Block Clone()
     {
-       Block other = (Block) this.MemberwiseClone();
-       return other;
+        Block other = (Block)this.MemberwiseClone();
+        return other;
     }
 
     public void Draw()
     {
-        if ( Type == BlockType.Filled )
+        if (Type == BlockType.Filled)
         {
             SplashKit.FillRectangle(_Colour, X * _Size, Y * _Size, _Size, _Size);
             SplashKit.DrawRectangle(Color.Black, X * _Size, Y * _Size, _Size, _Size);
         }
 
-        if ( Type == BlockType.Ghost )
+        if (Type == BlockType.Ghost)
         {
             SplashKit.DrawRectangle(_Colour, X * _Size, Y * _Size, _Size, _Size);
         }
 
-        if ( Type == BlockType.Wall )
+        if (Type == BlockType.Wall)
         {
             SplashKit.FillRectangle(Color.DarkSlateBlue, X * _Size, Y * _Size, _Size, _Size);
             SplashKit.DrawRectangle(Color.Black, X * _Size, Y * _Size, _Size, _Size);
         }
-        if ( Type == BlockType.Empty )
+        if (Type == BlockType.Empty)
         {
             SplashKit.DrawRectangle(Color.Black, X * _Size, Y * _Size, _Size, _Size);
         }

@@ -10,6 +10,7 @@ public class Game
     private int _Level = 1;
     private int _Lines = 0;
     public bool Quit = false;
+    public bool _GameOver = false;
     public Timer gameTimer;
     public List<Tetromino> BagOfPieces = new List<Tetromino>();
 
@@ -210,12 +211,13 @@ public class Game
 
     public void UpdateGame()
     {
-        if (gameTimer.Ticks > 0 && gameTimer.Ticks % 17 < 1)
+        if (gameTimer.Ticks > 0 && gameTimer.Ticks % 1000 < 17)
         {
-            Console.WriteLine(gameTimer.Ticks);
+            // Console.WriteLine(gameTimer.Ticks);
             MoveDown();
         }
-        // Console.WriteLine(gameTimer.Ticks);
+
+        // Console.WriteLine(gameTimer.Ticks * 60);
     }
 
     public void DrawGame()

@@ -66,8 +66,10 @@ public class Playfield
         // Starting at 1 and finshing n - 1 to ignore walls
         for (var col = 1; col < _Columns - 1; col++)
         {
+            // Copy the row downwards and redraw it one position lower
             _Grid[toRow, col] = _Grid[fromRow, col].Clone();
-            _Grid[toRow, col].Y++;        }
+            _Grid[toRow, col].Y++;
+        }
     }
 
     public void ClearLines()
@@ -88,7 +90,6 @@ public class Playfield
                 return false;
             }
         }
-
         return true;
     }
 }

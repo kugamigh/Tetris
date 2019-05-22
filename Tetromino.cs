@@ -29,11 +29,11 @@ public abstract class Tetromino
 
         _MainGrid = grid;
 
-        _Blocks = new Block[4,4];
+        _Blocks = new Block[4, 4];
 
         _Rotations = new List<int[,]>();
 
-        _Rotations.Add( new int[4,4]
+        _Rotations.Add(new int[4, 4]
             {
                 {0,0,0,0},
                 {0,0,0,0},
@@ -47,11 +47,11 @@ public abstract class Tetromino
 
     public void GenerateShape()
     {
-        for ( int i = 0; i < _Rotations[currentRotation].GetLength(0); i++ )
+        for (int i = 0; i < _Rotations[currentRotation].GetLength(0); i++)
         {
-            for ( int j = 0; j < _Rotations[currentRotation].GetLength(1); j++ )
+            for (int j = 0; j < _Rotations[currentRotation].GetLength(1); j++)
             {
-                if( _Rotations[currentRotation][i, j] == 1 )
+                if (_Rotations[currentRotation][i, j] == 1)
                 {
                     _Blocks[i, j] = new Block(BlockColor, X + j, Y + i);
                     _Blocks[i, j].Type = BlockType.Filled;
@@ -67,12 +67,12 @@ public abstract class Tetromino
 
     public void AssignToGrid()
     {
-        for ( int i = 0; i < _Blocks.GetLength(0); i++ )
+        for (int i = 0; i < _Blocks.GetLength(0); i++)
         {
-            for ( int j = 0; j < _Blocks.GetLength(1); j++ )
+            for (int j = 0; j < _Blocks.GetLength(1); j++)
             {
-                if ( _Blocks[i, j].Type == BlockType.Filled )
-                {    
+                if (_Blocks[i, j].Type == BlockType.Filled)
+                {
                     _MainGrid[i + Y, j + X] = _Blocks[i, j].Clone();
                 }
             }
@@ -129,13 +129,13 @@ public abstract class Tetromino
 
     public bool CheckOverlaps()
     {
-        for ( int i = 0; i < _Blocks.GetLength(0); i++ )
+        for (int i = 0; i < _Blocks.GetLength(0); i++)
         {
-            for ( int j = 0; j < _Blocks.GetLength(1); j++ )
+            for (int j = 0; j < _Blocks.GetLength(1); j++)
             {
-                if ( (_Blocks[i, j].Type == BlockType.Filled) && (_MainGrid[i + Y, j + X].Type == BlockType.Filled)
-                    || (_Blocks[i, j].Type == BlockType.Filled) && (_MainGrid[i + Y, j + X].Type == BlockType.Wall) )
-                {    
+                if ((_Blocks[i, j].Type == BlockType.Filled) && (_MainGrid[i + Y, j + X].Type == BlockType.Filled)
+                    || (_Blocks[i, j].Type == BlockType.Filled) && (_MainGrid[i + Y, j + X].Type == BlockType.Wall))
+                {
                     return true;
                 }
             }
@@ -157,8 +157,8 @@ public abstract class Tetromino
 
     public Tetromino Clone()
     {
-       Tetromino other = (Tetromino) this.MemberwiseClone();
-       return other;
+        Tetromino other = (Tetromino)this.MemberwiseClone();
+        return other;
     }
 }
 
@@ -166,10 +166,10 @@ public class IShape : Tetromino
 {
     public IShape(int originX, int originY, Block[,] grid) : base(originX, originY, grid)
     {
-        _Blocks = new Block[4,4];
+        _Blocks = new Block[4, 4];
         _Rotations = new List<int[,]>();
 
-        _Rotations.Add( new int[4,4]
+        _Rotations.Add(new int[4, 4]
             {
                 {1,1,1,1},
                 {0,0,0,0},
@@ -178,25 +178,7 @@ public class IShape : Tetromino
             }
         );
 
-        _Rotations.Add( new int[4,4]
-            {
-                {0,1,0,0},
-                {0,1,0,0},
-                {0,1,0,0},
-                {0,1,0,0}
-            }
-        );
-
-        _Rotations.Add( new int[4,4]
-            {
-                {1,1,1,1},
-                {0,0,0,0},
-                {0,0,0,0},
-                {0,0,0,0}
-            }
-        );
-
-        _Rotations.Add( new int[4,4]
+        _Rotations.Add(new int[4, 4]
             {
                 {0,1,0,0},
                 {0,1,0,0},
@@ -212,13 +194,13 @@ public class IShape : Tetromino
 }
 
 public class OShape : Tetromino
-{    
+{
     public OShape(int originX, int originY, Block[,] grid) : base(originX, originY, grid)
-    {        
-        _Blocks = new Block[4,4];
+    {
+        _Blocks = new Block[4, 4];
         _Rotations = new List<int[,]>();
 
-        _Rotations.Add( new int[4,4]
+        _Rotations.Add(new int[4, 4]
             {
                 {0,1,1,0},
                 {0,1,1,0},
@@ -237,10 +219,10 @@ public class TShape : Tetromino
 {
     public TShape(int originX, int originY, Block[,] grid) : base(originX, originY, grid)
     {
-        _Blocks = new Block[4,4];
+        _Blocks = new Block[4, 4];
         _Rotations = new List<int[,]>();
 
-        _Rotations.Add( new int[4,4]
+        _Rotations.Add(new int[4, 4]
             {
                 {1,1,1,0},
                 {0,1,0,0},
@@ -249,7 +231,7 @@ public class TShape : Tetromino
             }
         );
 
-        _Rotations.Add( new int[4,4]
+        _Rotations.Add(new int[4, 4]
             {
                 {0,1,0,0},
                 {1,1,0,0},
@@ -258,7 +240,7 @@ public class TShape : Tetromino
             }
         );
 
-        _Rotations.Add( new int[4,4]
+        _Rotations.Add(new int[4, 4]
             {
                 {0,1,0,0},
                 {1,1,1,0},
@@ -267,7 +249,7 @@ public class TShape : Tetromino
             }
         );
 
-        _Rotations.Add( new int[4,4]
+        _Rotations.Add(new int[4, 4]
             {
                 {1,0,0,0},
                 {1,1,0,0},
@@ -285,11 +267,11 @@ public class TShape : Tetromino
 public class SShape : Tetromino
 {
     public SShape(int originX, int originY, Block[,] grid) : base(originX, originY, grid)
-    {        
-        _Blocks = new Block[4,4];
+    {
+        _Blocks = new Block[4, 4];
         _Rotations = new List<int[,]>();
 
-        _Rotations.Add( new int[4,4]
+        _Rotations.Add(new int[4, 4]
             {
                 {0,1,1,0},
                 {1,1,0,0},
@@ -298,7 +280,7 @@ public class SShape : Tetromino
             }
         );
 
-        _Rotations.Add( new int[4,4]
+        _Rotations.Add(new int[4, 4]
             {
                 {1,0,0,0},
                 {1,1,0,0},
@@ -317,10 +299,10 @@ public class ZShape : Tetromino
 {
     public ZShape(int originX, int originY, Block[,] grid) : base(originX, originY, grid)
     {
-        _Blocks = new Block[4,4];
+        _Blocks = new Block[4, 4];
         _Rotations = new List<int[,]>();
 
-        _Rotations.Add( new int[4,4]
+        _Rotations.Add(new int[4, 4]
             {
                 {1,1,0,0},
                 {0,1,1,0},
@@ -329,7 +311,7 @@ public class ZShape : Tetromino
             }
         );
 
-        _Rotations.Add( new int[4,4]
+        _Rotations.Add(new int[4, 4]
             {
                 {0,1,0,0},
                 {1,1,0,0},
@@ -347,11 +329,11 @@ public class ZShape : Tetromino
 public class JShape : Tetromino
 {
     public JShape(int originX, int originY, Block[,] grid) : base(originX, originY, grid)
-    {        
-        _Blocks = new Block[4,4];
+    {
+        _Blocks = new Block[4, 4];
         _Rotations = new List<int[,]>();
 
-        _Rotations.Add( new int[4,4]
+        _Rotations.Add(new int[4, 4]
             {
                 {1,1,1,0},
                 {0,0,1,0},
@@ -360,7 +342,7 @@ public class JShape : Tetromino
             }
         );
 
-        _Rotations.Add( new int[4,4]
+        _Rotations.Add(new int[4, 4]
             {
                 {0,1,0,0},
                 {0,1,0,0},
@@ -369,7 +351,7 @@ public class JShape : Tetromino
             }
         );
 
-        _Rotations.Add( new int[4,4]
+        _Rotations.Add(new int[4, 4]
             {
                 {1,0,0,0},
                 {1,1,1,0},
@@ -378,7 +360,7 @@ public class JShape : Tetromino
             }
         );
 
-        _Rotations.Add( new int[4,4]
+        _Rotations.Add(new int[4, 4]
             {
                 {1,1,0,0},
                 {1,0,0,0},
@@ -397,11 +379,11 @@ public class LShape : Tetromino
 {
     public LShape(int originX, int originY, Block[,] grid) : base(originX, originY, grid)
     {
-        
-        _Blocks = new Block[4,4];
+
+        _Blocks = new Block[4, 4];
         _Rotations = new List<int[,]>();
 
-        _Rotations.Add( new int[4,4]
+        _Rotations.Add(new int[4, 4]
             {
                 {1,1,1,0},
                 {1,0,0,0},
@@ -410,7 +392,7 @@ public class LShape : Tetromino
             }
         );
 
-        _Rotations.Add( new int[4,4]
+        _Rotations.Add(new int[4, 4]
             {
                 {1,1,0,0},
                 {0,1,0,0},
@@ -419,7 +401,7 @@ public class LShape : Tetromino
             }
         );
 
-        _Rotations.Add( new int[4,4]
+        _Rotations.Add(new int[4, 4]
             {
                 {0,0,1,0},
                 {1,1,1,0},
@@ -428,7 +410,7 @@ public class LShape : Tetromino
             }
         );
 
-        _Rotations.Add( new int[4,4]
+        _Rotations.Add(new int[4, 4]
             {
                 {1,0,0,0},
                 {1,0,0,0},
