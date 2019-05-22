@@ -6,7 +6,7 @@ public class Playfield
     private int _Rows;
     private int _Columns;
     public Block[,] _Grid;
-    private int clearedCounter = 0;
+    public int clearedCounter { get; set; }
 
     public Playfield(int rows, int columns)
     {
@@ -76,7 +76,11 @@ public class Playfield
     {
         for (int row = _Rows - 1; row > 0; row--)
         {
-            while (isRowFilled(row)) deleteRow(row);
+            while (isRowFilled(row))
+            {
+                deleteRow(row);
+                clearedCounter++;
+            }
         }
         DrawBlocks();
     }

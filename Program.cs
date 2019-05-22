@@ -7,7 +7,7 @@ public class Program
     public static void Main()
     {
         Window gameWindow = new Window("Tetris", 320, 640);
-        Game Tetris = new Game(gameWindow, 1);
+        Game Tetris = new Game(gameWindow);
         do
         {
             gameWindow.Clear(Color.White);

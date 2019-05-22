@@ -7,19 +7,16 @@ public class Game
     private Playfield TetrisGrid = new Playfield(20, 10);
     public Tetromino _CurrentShape;
     public Tetromino _CollisionTester;
-    private int _Level = 1;
-    private int _Lines = 0;
     public bool Quit = false;
     public bool _GameOver = false;
     public Timer gameTimer;
     public List<Tetromino> BagOfPieces = new List<Tetromino>();
 
-    public Game(Window gameWindow, int level)
+    public Game(Window gameWindow)
     {
         FillBagOfPieces();
         _CurrentShape = ChooseNewShape();
         _CollisionTester = _CurrentShape.Clone();
-        _Level = level;
         gameTimer = SplashKit.CreateTimer("gameTicks");
         gameTimer.Start();
         gameTimer.Pause();
@@ -211,13 +208,32 @@ public class Game
 
     public void UpdateGame()
     {
-        if (gameTimer.Ticks > 0 && gameTimer.Ticks % 1000 < 17)
+        // Determine if we have any blocks in the row second from the top of screen (spawn area)
+        for (int col = 1; col < TetrisGrid._Grid.GetLongLength(1) - 1; col++)
         {
-            // Console.WriteLine(gameTimer.Ticks);
-            MoveDown();
+            if (TetrisGrid._Grid[1, col].Type == BlockType.Filled)
+            {
+                _GameOver = true;
+            }
         }
 
-        // Console.WriteLine(gameTimer.Ticks * 60);
+        if (_GameOver == true)
+        {
+            // Restart the game and print your score when you lose
+            Console.WriteLine($"{TetrisGrid.clearedCounter} lines cleared");
+            TetrisGrid.clearedCounter = 0;
+            gameTimer.Reset();
+            gameTimer.Pause();
+            TetrisGrid = new Playfield(20, 10);
+            _GameOver = false;
+        }
+
+        // Since we refresh at 60 frames per second, our ticks are incremented by 16 or 17 due to floating point rounding
+        // Due to this rounding, there may be "double" movements or "skipped" movements.  I could find a solution.
+        if (gameTimer.Ticks > 0 && gameTimer.Ticks % 500 < 17)
+        {
+            MoveDown();
+        }
     }
 
     public void DrawGame()
